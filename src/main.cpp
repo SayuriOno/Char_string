@@ -20,7 +20,7 @@ void loop() {
 
 
 void textoChar()
-{  //! strlen:
+{  //! strlen: ========================================================================================================================
 
    const char* cidade = "Sao Paulo";
    //! quando eu vejo um * significa que eu estou trabalhando com um endereco 
@@ -29,7 +29,7 @@ void textoChar()
    //! strlen conta os caracteres incluindo o /0 no final
 
 
-   //! sizeof:
+   //! sizeof: ========================================================================================================================
 
    Serial.print( "comprimento do texto: ");
    Serial.println(tamanhoTextoCidade);
@@ -39,7 +39,7 @@ void textoChar()
     Serial.print("espaco ultilizado ");
     Serial.println(tamanhoVariavelCidade);
 
-    //! char com vetor
+    //! char com vetor ========================================================================================================================
 
     char vetorTexto[]= {'s', 'a', 'y','u','r','i'};
     Serial.println(vetorTexto);
@@ -49,7 +49,7 @@ void textoChar()
   const char* cidade2 = "sao Caetano";
 
 
-  //! strcmp:
+  //! strcmp: ========================================================================================================================
 
   if(strcmp(cidade1,cidade2) == 0 )
   //!compara o lexicamente as duas palavras
@@ -60,25 +60,25 @@ void textoChar()
   Serial.print(" os textos sao diferentes"); 
 
 
-  //! texto editavel com char
+  //! texto editavel com char ========================================================================================================================
 
   char nomeAluno[20]= "thiagp";
   Serial.println(nomeAluno);
 
- //!alterando caracteres individualmente
+ //!alterando caracteres individualmente ========================================================================================================================
 
  nomeAluno[6]= 'o';
  Serial.print(nomeAluno);
  //! cuidado, o vetor precisa ter espaco o suficiente
 
 
-//!strcpy:
+//!strcpy: ========================================================================================================================
 
 strcpy(nomeAluno, "Felipe");
 //!copiando outro texto para dentro do vetor
 Serial.println(nomeAluno);
 
-//! strcat:
+//! strcat: ========================================================================================================================
 
 char frase[40]= "ola ";
 strcat(frase, "Mundo! ");
@@ -86,7 +86,7 @@ strcat(frase, "Mundo! ");
 Serial.println(frase);
 
 
-//! strchr:
+//! strchr: ========================================================================================================================
 
 //!procurando um caractere no texto 
 //!encontra um caracter no texto 
@@ -101,7 +101,7 @@ else
 }
 
 
-//! ATOI:
+//! ATOI: ========================================================================================================================
 
 //!convertendo texto numerico para inteiro 
 char idadeTexto[ ] = "45"; // 52,53, /0
@@ -109,9 +109,9 @@ int idade = atoi(idadeTexto);
 Serial.println(idade);
 
 
-//! snprintf:
+//! snprintf: ========================================================================================================================
 
-//! montando texto
+//! monta um texto dentro de um vertor de char
 char buffer[100];
 char* local = "sala de aula";
 int temperatura = 26.4;
@@ -125,85 +125,115 @@ Serial.print(buffer);
 //! o f indica float, indicando numeros
 //! enquanto o d indica as variaveis de tipo int
 //! ja o % indica % mesmo.
-//! sintaxe: snprintf(local, tamanho, "texto que aparecera na tela", variaveis);
+//! sintaxe: snprintf(variavel, onde ele vai ser montado , "texto que aparecera na tela", texto maximo do texto, txto com formatacao, itens de formato);
 //! o \n mostra a mudanca de linha 
-
-//!um bom dev nao usa numeros constantes no programa
-
-
+//! o \r retorna ao comeco da linha
+//! um bom dev nao usa numeros constantes no programa
+//! isto eh util quando:
+//! - precisa salvar um texto
+//! - mandar para o dusplay
+//! - imprimir na serial
 //!
-//!===============================================================================
+//! ESPECIFICADORES:============================================================================================================================
+//! %d ou &i sao variaveis tipo int
+//! %U eh variavel tipo unsigned int 
+//! %ld eh variavel tipo long
+//! %lu eh variavel tipo unsigned long
+//! %f eh variavel tipo float
+//! %e eh variavel tipo notacao cientifica 
+//! %g eh variavel tipo float mas mais curto
+//! %c eh variavel tipo char
+//! %s eh variavel tipo char* (string)
+//! %x eh variavel hexadecimal minusculo/maiusculo 
+//! %o eh variavel tipo octal
+//! %p eh variavel tipo ponteiro 
+//! %% eh variavel do proprio %
+
+//! flag, largura, e precisao:
+//! %5d = imprime com largura mnima alihado a direita [    3], [  100] [10000000]
+//! %-4d = imprime com largura minima de 4 alinhado a esquerda [3    ],[100 ], [123456]
+//! %03d = completa com zeros a esquerda [003]
+//! %+d = sempre mostra o sinal de mais a frente [+3]
+//! %.2f = 2 casas decimais em um float
+//! %4.2f = largura minima 4 a direita com 2 casas decimais
+//! %0.2X = exadeciaml com 2 digitos [0F] [3A]
+//! %#x = imprime o prefixo 0x [0x2a] [0xF]
+//! %.3s = somente os 3 primeiros caracteres da string
+//! %*d = largura passada como argumento [ snprintf(buffer, sizeof(buffer), "numero %*d", largura, numero
+//!                                                          logo sera impresso [  9] ]
+//!
+//!==============================================================================================================================================
 
 String nome = "thiago";
 String curso = "arduino";
 String mensagem= "ola";
 
-//! concatenado string
+//! concatenado string =========================================================================================================================
 
 mensagem=mensagem + "," + nome + "bem vindo ao curso de" + curso + ".";
 Serial.println(mensagem);
 
-//! tamanho do string 
+//! tamanho do string ========================================================================================================================
 
 int tamanhoMensagem = mensagem.length();
 Serial.print("tamanho da string em letras:  ");
 Serial.print( tamanhoMensagem);
 
-//! acessando caractere em uma posicao especifica
+//! acessando caractere em uma posicao especifica ========================================================================================================================
 
 char primeiraLetra = mensagem.charAt(0);
 Serial.println("primeira Letra: ");
 Serial.println(primeiraLetra);
 
-//! ao inves de charAt, eh possivel acessar um colchetes 
+//! ao inves de charAt, eh possivel acessar um colchetes  
 
 char segundaLetra = mensagem[1];
 Serial.println(segundaLetra);
 
 
-//! procurando um texto dentro da string
+//! procurando um texto dentro da string ========================================================================================================================
 
 int posicaoTextoProcurado = mensagem.indexOF(curso);
 Serial.println(posicaoTextoProcurado);
 
-//! extraindo um texto dentro a string 
+//! extraindo um texto dentro a string ========================================================================================================================
 
 int inicioNomeCurso = posicaoTextoProcurado + 9; //pocicao da palavra curso + 9 caracteres 
 Serial.println(mensagem.substring(inicioNomeCurso, tamanhoMensagem));
 
-//! substituindo texto dentro da string
+//! substituindo texto dentro da string ========================================================================================================================
 
 mensagem.replace("Ola," , "oi tudo bom?")
 Serial.println(mensagem);
 
-//! convertendo para maiuscula
+//! convertendo para maiuscula ========================================================================================================================
 
 mensagem.toUpperCase();
 Serial.println(mensagem);
 
-//! convertendo tudo para minusculo
+//! convertendo tudo para minusculo ========================================================================================================================
 
 mensagem.toLowerCase();
 Serial.println(mensagem);
 
-//! convertendo texto numerico para inteiro
+//! convertendo texto numerico para inteiro ========================================================================================================================
 
 String textoNumero= "123";
 int numero = textoNumero.toInt();
 Serial.println(numero * 2);
 
 
-//! verificando se a string esta vazia
+//! verificando se a string esta vazia ========================================================================================================================
 
-String textovazio = " ";
+String textovazio = " "; 
 if (textovazio.length()==0)
 {Serial.println("o texto esta vazio");}
 
 
 
-//! convertendo string para const char
-//! isso eh util quando alguma biblioteca espera texto estilo C
+//! convertendo string para const char========================================================================================================================
 
+//! isso eh util quando alguma biblioteca espera texto estilo C
 const char* textoComoChar = mensagem.c_str();
 
 
